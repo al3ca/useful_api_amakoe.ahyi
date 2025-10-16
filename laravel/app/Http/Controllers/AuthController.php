@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -45,8 +46,7 @@ class AuthController extends Controller
 
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            // abort(401);
-            return ['message' => "identifiants invalides"];
+            return response()->json(['message' => 'Identifiants invalides'], 401);
         };
 
         $token = $user->createToken($user->name);
