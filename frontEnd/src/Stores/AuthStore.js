@@ -28,6 +28,22 @@ export const useAuthStore = defineStore("auth", {
             } catch (error) {
                 console.log(error);
             }
+        },
+
+
+        async register(loginData) {
+            try {
+                axios.post(`http://127.0.0.1:8000/api/register`, {
+                    email: loginData.email,
+                    password: loginData.password,
+                    name: loginData.name
+                })
+                    .the(response => {
+                        console.log("connected.......")
+                    })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 });

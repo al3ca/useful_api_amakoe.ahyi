@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="loginUser">
+        <form>
             <div>
                 <label for="email">Email</label>
                 <input v-model="email" type="email">
@@ -12,7 +12,7 @@
             </div>
 
             <div>
-                <button type="submit">Login</button>
+                <button @click.stop="loginUser">Login</button>
             </div>
         </form>
     </div>
@@ -27,9 +27,10 @@ const name = ref('')
 const email = ref('')
 const password = ref('')
 
-const auth = useAuthStore()
 
 const loginUser = () => {
+    const auth = useAuthStore()
+
     auth.login({
         email: email.value,
         password: password.value,
